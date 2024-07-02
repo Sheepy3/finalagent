@@ -55,7 +55,9 @@ func place_goal(input_position: Vector3) -> Vector3:
 	
 	# If we've reached this point, the goal is successfully placed
 	print("Goal placed successfully")
-	return target.global_position
+	var result:Vector3 = target.global_position 
+	target.queue_free()
+	return result
 
 func get_random_position_around_node(node: Node, min_distance:float, max_distance: float) -> Vector3:
 	# Get the current global position of the node
