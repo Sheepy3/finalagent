@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://fp7wg1eytxld"]
+
+[ext_resource type="Script" path="res://FinalAgent/agent.gd" id="1_wqmi8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vp2nr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yfq6j"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_wqmi8")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_vp2nr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_yfq6j")
+
+[node name="Origin" type="Marker3D" parent="."]
+
+[node name="Label3D" type="Label3D" parent="Origin"]
+billboard = 2
+text = "Origin"
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, 2, 0)
+
+[node name="current_action" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09362, 0)
+billboard = 1
+text = "State"
+
+[node name="ThinkTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="GiveUpTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="Goal" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.11972, 0)
+visible = false
+
+[node name="Label3D" type="Label3D" parent="Goal"]
+visible = false
+billboard = 1
+text = "Goal"
+
+[node name="RayCast3D" type="RayCast3D" parent="Goal"]
+visible = false
+target_position = Vector3(0, -2, 0)
+collision_mask = 16
+hit_from_inside = true
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
+[connection signal="timeout" from="ThinkTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="GiveUpTimer" to="." method="_on_give_up_timer_timeout"]
