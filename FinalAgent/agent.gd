@@ -4,15 +4,15 @@ extends CharacterBody3D
 var gravity:float = ProjectSettings.get_setting("physics/3d/default_gravity")
 #var ahf:Script = load()
 var ahf := preload("res://FinalAgent/Helpers/ahf.gd").new(self)
+const uuid_util = preload('res://addons/uuid/uuid.gd')
 @export var current_goal:String = ""
 @export var current_action:String = "Idle"
 @export var Agentdata:AgentData
 @onready var nav:NavigationAgent3D = $NavigationAgent3D
-
 @onready var origin:Marker3D = $Origin
-@onready var vision:RayCast3D = $RayCast3D
+
 var vision_target_global:Vector3
-var target_rotation:int 
+#var target_rotation:int 
 var speed:int = 2
 var accel:int = 10
 var state_switch:bool
@@ -22,7 +22,10 @@ func _ready() -> void:
 func _physics_process(delta:float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-
+### STATE INTERRUPT ###
+	
+	
+### STATE HANDLING ###
 	match current_action.to_lower():
 		"walking":
 			if state_switch:
@@ -41,10 +44,14 @@ func _physics_process(delta:float) -> void:
 		"idle":
 			velocity.x = lerp(velocity.x, 0.0, 0.1)
 			velocity.z = lerp(velocity.z, 0.0, 0.1)
-		"turn":
-			rotation.y = lerp_angle(rotation.y,target_rotation,1)
-			if rotation.y == target_rotation:
-				current_action == "Idle"
+		"looking_for_enemies":
+			for nodes:Vector3 in Overseer.vision_poll(self):
+				var is_in_fov: = await Overseer.is_enemy_in_fov(self, nodes, 50)
+				if is_in_fov:
+					print(is_in_fov)
+					pass
+				#player_position: Vector3, player_direction: Vector3, enemy_position: Vector3, fov: int) -> bool:
+			pass
 	move_and_slide()
 	$current_action.set_text(current_action)
 
@@ -60,8 +67,6 @@ func _on_timer_timeout() -> void:
 func _on_navigation_agent_3d_target_reached() -> void:
 	_switch_state("Idle")
 	velocity = Vector3(0,0,0) 
-	$GiveUpTimer.stop()
-	#print("we did it bros")
 	
 func _on_give_up_timer_timeout() -> void:
 	print("chat lets just give up")

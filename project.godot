@@ -15,10 +15,15 @@ run/main_scene="res://Scene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Overseer="*res://FinalAgent/Overseer.gd"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=2
 
 [layer_names]
 
+3d_physics/layer_2="agents"
 3d_physics/layer_5="ground"
