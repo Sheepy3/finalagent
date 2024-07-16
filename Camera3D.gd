@@ -20,7 +20,7 @@ class_name FlyCamera
 ## 
 
 # ------------------------------------------------------------------------ Const
-const speed = 0.1
+
 const sensitivity = 0.001
 
 # ----------------------------------------------------------------------- Global
@@ -30,7 +30,7 @@ var view_motion: Vector2
 var gimbal_base: Transform3D
 var gimbal_pitch: Transform3D
 var gimbal_yaw: Transform3D
-
+var speed:float = 0.1
 
 # ----------------------------------------------------------------------- Public
 func is_active() -> bool:
@@ -59,7 +59,6 @@ func _input(event:InputEvent) ->void:
 				active = active == false
 				update_activation()
 				return
-
 		if active == false:
 			return
 
@@ -99,7 +98,10 @@ func _process(delta:float) -> void:
 	view_motion = Vector2()
 
 	global_transform = gimbal_base * (gimbal_yaw * gimbal_pitch)
-
+	if Input.is_key_pressed(KEY_SHIFT):
+		speed = 0.3
+	else:
+		speed = 0.1
 
 # ---------------------------------------------------------------------- Private
 func update_activation() -> void:
