@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://fp7wg1eytxld"]
+
+[ext_resource type="Script" path="res://FinalAgent/agent.gd" id="1_wqmi8"]
+[ext_resource type="PackedScene" uid="uid://drvmc8q1c3nok" path="res://Assets/Agent.blend" id="3_r6iic"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yfq6j"]
+
+[node name="agentUUID" type="CharacterBody3D" groups=["Agent"]]
+collision_layer = 3
+script = ExtResource("1_wqmi8")
+current_action = "looking_for_enemies"
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 1.2
+
+[node name="AgentModel" parent="." instance=ExtResource("3_r6iic")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_yfq6j")
+
+[node name="Origin" type="Marker3D" parent="."]
+
+[node name="Label3D" type="Label3D" parent="Origin"]
+billboard = 2
+text = "Origin"
+
+[node name="current_action" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09362, 0)
+billboard = 1
+texture_filter = 0
+text = "State"
+
+[node name="ThinkTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="GiveUpTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
+[connection signal="timeout" from="ThinkTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="GiveUpTimer" to="." method="_on_give_up_timer_timeout"]

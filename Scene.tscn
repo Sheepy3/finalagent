@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://qcsm671xrcji"]
 
 [ext_resource type="PackedScene" uid="uid://fp7wg1eytxld" path="res://FinalAgent/agent.tscn" id="1_rbms1"]
-[ext_resource type="Script" path="res://Camera3D.gd" id="2_45yuf"]
+[ext_resource type="Script" path="res://debug/Camera3D.gd" id="2_nlarc"]
 [ext_resource type="PackedScene" uid="uid://braxcts5lg1u0" path="res://FinalAgent/Helpers/Dummy.tscn" id="3_0nnuu"]
 [ext_resource type="PackedScene" uid="uid://v7rtt38lmnm" path="res://Assets/Barricade.blend" id="4_42i04"]
 [ext_resource type="PackedScene" uid="uid://3p57fad4h07e" path="res://debug/AgentDebugger.tscn" id="5_11run"]
@@ -39,7 +39,7 @@ transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 3.31034,
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.995073, 0.099146, 0, -0.099146, 0.995073, 2.194, 4.499, 9.986)
-script = ExtResource("2_45yuf")
+script = ExtResource("2_nlarc")
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -2)

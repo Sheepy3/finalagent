@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://3p57fad4h07e"]
+
+[ext_resource type="Script" path="res://debug/AgentDebugger.gd" id="1_8j08n"]
+
+[node name="AgentDebugger" type="Panel"]
+anchors_preset = -1
+anchor_right = 0.328583
+anchor_bottom = 0.228
+offset_right = -0.528015
+offset_bottom = 0.255997
+script = ExtResource("1_8j08n")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UUID" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Agent UUID"
+
+[node name="State" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "State"
+
+[node name="Memory" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Memory:"
+
+[node name="MemDisplay" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
