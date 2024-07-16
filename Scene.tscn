@@ -34,7 +34,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="Agent" parent="." instance=ExtResource("1_rbms1")]
-transform = Transform3D(0.366501, 0, 0.930417, 0, 1, 0, -0.930417, 0, 0.366501, 6.1671, 3.399, 1.51325)
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 3.31034, 1.866, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.995073, 0.099146, 0, -0.099146, 0.995073, 2.194, 4.499, 9.986)
@@ -56,7 +56,7 @@ collision_layer = 17
 shape = SubResource("ConcavePolygonShape3D_bhgdb")
 
 [node name="RigidBody3D" parent="." instance=ExtResource("3_0nnuu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.80964, 1.86397, -0.797275)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.70409, 2.25266, -0.56185)
 
 [node name="Barricade" parent="." instance=ExtResource("4_42i04")]
 transform = Transform3D(0.0369751, 0, 0.999316, 0, 1, 0, -0.999316, 0, 0.0369751, 5.65342, 0.409893, 6.07775)

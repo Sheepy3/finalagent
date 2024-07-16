@@ -23,7 +23,6 @@ class_name FlyCamera
 const speed = 0.1
 const sensitivity = 0.001
 
-
 # ----------------------------------------------------------------------- Global
 var active := true
 var motion: Vector3
@@ -49,20 +48,20 @@ func _ready() -> void:
 
 
 func _input(event:InputEvent) ->void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and active:
 		view_motion += event.relative
 		get_viewport().set_input_as_handled()
 
 	elif event is InputEventKey:
-	#	if event.keycode == KEY_TAB:
-	#		if event.pressed:
-	#			# Each click toggle.
-	#			active = active == false
-	#			update_activation()
-	#			return
+		if event.keycode == KEY_TAB:
+			if event.pressed:
+				# Each click toggle.
+				active = active == false
+				update_activation()
+				return
 
-	#	if active == false:
-	#		return
+		if active == false:
+			return
 
 		var value: float = 0
 		if event.pressed:
@@ -95,7 +94,7 @@ func _process(delta:float) -> void:
 
 # ---------------------------------------------------------------------- Private
 func update_activation() -> void:
-	set_process(active)
-	current = active
+	#set_process(active)
+	#current = active
 	if active == false:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
