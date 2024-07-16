@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://qcsm671xrcji"]
+[gd_scene load_steps=9 format=3 uid="uid://qcsm671xrcji"]
 
 [ext_resource type="PackedScene" uid="uid://fp7wg1eytxld" path="res://FinalAgent/agent.tscn" id="1_rbms1"]
 [ext_resource type="Script" path="res://Camera3D.gd" id="2_45yuf"]
 [ext_resource type="PackedScene" uid="uid://braxcts5lg1u0" path="res://FinalAgent/Helpers/Dummy.tscn" id="3_0nnuu"]
 [ext_resource type="PackedScene" uid="uid://v7rtt38lmnm" path="res://Assets/Barricade.blend" id="4_42i04"]
+[ext_resource type="PackedScene" uid="uid://3p57fad4h07e" path="res://debug/AgentDebugger.tscn" id="5_11run"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_f05do"]
 vertices = PackedVector3Array(-0.5, -0.59675, 9.5, -0.5, -0.59675, 4.5, -1.75, -0.59675, 4.25, -9.5, 2.90325, 9.5, -6.92857, 2.15325, 9.5, -1.78571, -0.59675, 9.5, -3.96429, 0.15325, 5.75, -7.28571, 2.40325, 8, -4.00498, 0.15325, 7.99697, -1.75, -0.59675, 4.25, -1.75, -0.59675, -9.5, -9.5, 2.90325, -9.5, -9.5, 2.90325, 9.5, -7.28571, 2.40325, 8, -3.96429, 0.15325, 5.75, -6.91667, 2.15325, -9.5, -6.97979, 2.15325, -2.48822, -4.01996, 0.15325, -8.49204, -4.01972, 0.15325, -1.0223, -0.75, 4.40325, -9.5, -0.75, 4.40325, 3.25, -0.25, 4.40325, -0.25, -0.25, 4.40325, -8.5, 0.75, -0.59675, -3.25, 4.5, -0.59675, -3.5, 4.5, -0.59675, -7.75, 0.75, -0.59675, -9.5, 6.75, -0.59675, -8, 7, -0.59675, -2.5, 9.5, -0.59675, -2.5, 9.5, -0.59675, -9.5, 9.5, -0.59675, -9.5, 0.75, -0.59675, -9.5, 4.5, -0.59675, -7.75, 6.75, -0.59675, -8, 5.5, 0.90325, -7, 5.5, 0.90325, -3, 6, 0.90325, -3, 9.5, -0.59675, -2.5, 7, -0.59675, -2.5, 6.5, -0.59675, -1.75, 4.75, -0.59675, -1.75, 4.5, -0.59675, -3.5, 0.75, -0.59675, -3.25, 0.75, -0.59675, 4, 0.75, -0.59675, 4, -0.5, -0.59675, 4.5, -0.5, -0.59675, 9.5, 0.75, -0.59675, 4, -0.5, -0.59675, 9.5, 9.5, -0.59675, 9.5, 9.5, -0.59675, -2.5, 6.5, -0.59675, -1.75, 6.5, -0.59675, -1.75, 4.75, -0.59675, -1.75, 0.75, -0.59675, 4)
@@ -40,6 +41,10 @@ transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 3.31034,
 transform = Transform3D(1, 0, 0, 0, 0.995073, 0.099146, 0, -0.099146, 0.995073, 2.194, 4.499, 9.986)
 script = ExtResource("2_45yuf")
 
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -2)
+debug_shape_thickness = 1
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09675, 0)
 navigation_mesh = SubResource("NavigationMesh_f05do")
@@ -60,3 +65,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.70409, 2.25266, -0.56185)
 
 [node name="Barricade" parent="." instance=ExtResource("4_42i04")]
 transform = Transform3D(0.0369751, 0, 0.999316, 0, 1, 0, -0.999316, 0, 0.0369751, 5.65342, 0.409893, 6.07775)
+
+[node name="AgentDebugger" parent="." instance=ExtResource("5_11run")]

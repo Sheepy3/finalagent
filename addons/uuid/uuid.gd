@@ -73,7 +73,7 @@ func as_array() -> Array:
 
 func as_dict(big_endian := true) -> Dictionary:
   if big_endian:
-    return {
+     return {
       "low"  : (_uuid[0]  << 24) + (_uuid[1]  << 16) + (_uuid[2]  << 8 ) +  _uuid[3],
       "mid"  : (_uuid[4]  << 8 ) +  _uuid[5],
       "hi"   : (_uuid[6]  << 8 ) +  _uuid[7],
@@ -81,7 +81,7 @@ func as_dict(big_endian := true) -> Dictionary:
       "node" : (_uuid[10] << 40) + (_uuid[11] << 32) + (_uuid[12] << 24) + (_uuid[13] << 16) + (_uuid[14] << 8 ) +  _uuid[15]
     }
   else:
-    return {
+     return {
       "low"  : _uuid[0]          + (_uuid[1]  << 8 ) + (_uuid[2]  << 16) + (_uuid[3]  << 24),
       "mid"  : _uuid[4]          + (_uuid[5]  << 8 ),
       "hi"   : _uuid[6]          + (_uuid[7]  << 8 ),

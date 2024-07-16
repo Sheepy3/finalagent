@@ -77,7 +77,16 @@ func _input(event:InputEvent) ->void:
 		elif event.keycode == KEY_D:
 			motion.x = value
 		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			pass
+			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				#print($RayCast3D.get_collider())
+				if $RayCast3D.get_collider() and $RayCast3D.get_collider().is_in_group("Agent"):
+					Overseer.pass_agent($RayCast3D.get_collider())
+				else:
+					print("Not an agent!")
 
 		get_viewport().set_input_as_handled()
 

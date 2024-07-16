@@ -18,6 +18,7 @@ var accel:int = 10
 var state_switch:bool
 func _ready() -> void:
 	origin.top_level = true
+	name = uuid_util.v4()
 
 func _physics_process(delta:float) -> void:
 	if not is_on_floor():
@@ -48,7 +49,7 @@ func _physics_process(delta:float) -> void:
 			for nodes:Vector3 in Overseer.vision_poll(self):
 				var is_in_fov: = await Overseer.is_enemy_in_fov(self, nodes, 50)
 				if is_in_fov:
-					print(is_in_fov)
+					#print(is_in_fov)
 					pass
 				#player_position: Vector3, player_direction: Vector3, enemy_position: Vector3, fov: int) -> bool:
 			pass

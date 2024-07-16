@@ -8,7 +8,6 @@ func vision_poll(agent:Node3D) -> Array:
 			#print(node.name)
 			in_sight.push_front(node.position)
 	return in_sight
-	#pass
 
 func is_enemy_in_fov(seeker: Node3D, enemy_position: Vector3, fov: int) -> bool:
 	var player_position:Vector3 = seeker.position 
@@ -34,6 +33,13 @@ func is_enemy_in_fov(seeker: Node3D, enemy_position: Vector3, fov: int) -> bool:
 	fov_mesh.rotate_x(PI/2)
 	fov_mesh.mesh = cone_mesh
 
-	await get_tree().create_timer(0.1).timeout # Wait for a short time to allow visualization
+	await get_tree().create_timer(0.1).timeout # Wait for a short time to allow visualization. 
+	#TODO:breakout visualization into separate function
 	fov_mesh.queue_free()
 	return angle_deg <= (fov / 2.0)
+	
+func pass_agent(agent_node:Node3D) -> void:
+	var debugger:Panel = get_tree().root.find_child("AgentDebugger", true, false)
+	debugger.find_child("UUID").text = agent_node.name
+	debugger.agent_to_debug = agent_node
+	print("success")
